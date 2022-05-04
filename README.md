@@ -78,3 +78,43 @@ html, body {
     height: 100%;
 }
 ```
+
+## Setting up the project (IFC.js)
+
+### WebAssembly
+
+The next thing to do is to copy the web-ifc.wasm and `web-ifc-mt.wasm` files to a directory in your project. It can be found in `node_modules\web-ifc` (or `node_modules\three\examples\jsm\loaders\ifc` if you are only using Three's IFCLoader). We can copy them wherever we want; in this example, they will be copied to a folder called wasm in the root directory of the project.
+
+These files are necessary because they contain the compiled C++ logic of [web-ifc](https://github.com/IFCjs/web-ifc), which is the parsing core to read and write IFC files with native speed.
+
+> These files have to be served statically in your application. This might need different tweaks if you are using frameworks or libraries like React, Angular, Vue or Svelte.
+### Setting up web-ifc-viewer
+
+We are now going to create the JavaScript file to write the code for our application (eg: index.js). This file can be located anywhere and have any name, but you must reflect this in the `rollup.config.js` in the next step.
+
+Below code is where we are setting up a basic threejs scene using web-ifc-viewer. In the next step we will add the functionality to load models into this viewer.
+
+```js
+import { Color } from 'three';
+import { IfcViewerAPI } from 'web-ifc-viewer';
+
+const container = document.getElementById('viewer-container');
+const viewer = new IfcViewerAPI({ container, backgroundColor: new Color(0xffffff) });
+viewer.axes.setAxes();
+viewer.grid.setGrid();
+
+const input = document.getElementById("file-input");
+
+window.ondblclick = () => viewer.IFC.selector.pickIfcItem(true);
+window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
+viewer.clipper.active = true;
+
+window.onkeydown = (event) => {
+    if (event.code === 'KeyP') {
+        viewer.clipper.createPlane();
+    }
+    else if (event.code === 'KeyO') {
+        viewer.clipper.deletePlane();
+    }
+}
+```
