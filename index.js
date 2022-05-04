@@ -18,11 +18,19 @@ input.addEventListener("change",
 
         const file = changed.target.files[0];
         const ifcURL = URL.createObjectURL(file);
-        viewer.IFC.loadIfcUrl(ifcURL);
+        loadIfc(ifcURL);
     },
 
     false
 );
+
+async function loadIfc(url) {
+    // await viewer.IFC.setWasmPath("static/wasm/");
+    const model = await viewer.IFC.loadIfcUrl(url);
+    viewer.shadowDropper.renderShadow(model.modelID);
+}
+
+loadIfc('models/01.ifc');
 
 window.onkeydown = (event) => {
     if (event.code === 'KeyP') {

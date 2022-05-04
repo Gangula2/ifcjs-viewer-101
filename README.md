@@ -140,7 +140,7 @@ input.addEventListener("change",
 > Keep in mind that if you haven't saved the wasm files in the root of served files of the project, you'll need to specify its location with `setWasmPath`. For instance, if we had them stored in a folder called `wasm` contained in a folder called `static` in the root of the project, we would do the following:
 
 > ```
-> ifcLoader.ifcManager.setWasmPath("static/wasm/");
+> await viewer.IFC.setWasmPath("static/wasm/");
 > ```
 
 
@@ -206,3 +206,16 @@ You'll be able to see the application as expected once your have bundled the ind
 
 To run the application locally after bundling the file, we will need a local server. If you are using VS Code as IDE, one option is to install the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), which allows us to open an instance of Google Chrome, run our web application and see the changes we make to the code in real-time.
 
+### Loading IFC files (from server)
+
+iIn order to load a ifc file from a server, you need to use the `loadIfcUrl()` to convert the model path url into something that the web-ifc-viewer can read. Below is the `loadIfc(url)` function that does that.
+
+```js
+async function loadIfc(url) {
+    // await viewer.IFC.setWasmPath("static/wasm/");
+    const model = await viewer.IFC.loadIfcUrl(url);
+    viewer.shadowDropper.renderShadow(model.modelID);
+}
+
+loadIfc('models/01.ifc');
+```
