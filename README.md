@@ -118,3 +118,27 @@ window.onkeydown = (event) => {
     }
 }
 ```
+
+### Loading IFC files (user-uploaded)
+
+Finally, we will use IFC.js to load IFC files by allowing the user to choose a local file and using the `IfcViewerAPI()` we instantiated above to load the model.
+
+```js
+input.addEventListener("change",
+
+    async (changed) => {
+
+        const file = changed.target.files[0];
+        const ifcURL = URL.createObjectURL(file);
+        viewer.IFC.loadIfcUrl(ifcURL);
+    },
+
+    false
+);
+```
+
+> Keep in mind that if you haven't saved the wasm files in the root of served files of the project, you'll need to specify its location with `setWasmPath`. For instance, if we had them stored in a folder called `wasm` contained in a folder called `static` in the root of the project, we would do the following:
+
+> ```
+> ifcLoader.ifcManager.setWasmPath("static/wasm/");
+> ```
