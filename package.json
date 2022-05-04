@@ -4,15 +4,16 @@
   "description": "Basic source code for Web-IFC-Viewer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c ./rollup.config.js",
+    "watch": "rollup -w -c ./rollup.config.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AnweshGangula/ifcjs-viewer-101.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Anwesh Gangula",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AnweshGangula/ifcjs-viewer-101/issues"
   },

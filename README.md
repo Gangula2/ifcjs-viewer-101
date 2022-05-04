@@ -163,3 +163,39 @@ which is short for:
 ```
 npx rollup index.js --file bundle.js --format es --plugin @rollup/plugin-node-resolve
 ```
+
+### Bundling config
+
+Next, we'll create the rollup configuration file to save the bundling configuration and run the file instead of typing the entire command each time. This file has to be called `rollup.config.js` and includes the reference to the plugins we have previously installed.
+
+```javascript
+import resolve from '@rollup/plugin-node-resolve';
+
+export default {
+  input: 'index.js',
+  output: [
+    {
+      format: 'esm',
+      file: 'bundle.js'
+    },
+  ],
+  plugins: [
+    resolve(),
+  ]
+};
+```
+
+Also, the `package.json` file needs to be modified to contain the scripts to control rollup easily. In each script, you'll have to specify the relative path to your rollup configuration file. If we have installed everything correctly, we should see the same dependencies in this file (the version of the libraries may differ).
+
+- `npm run build` will bundle the project and create a file called bundle.js in the root directory of the project.
+
+- `npm run watch` will activate the watch mode, updating that file automatically every time we make changes to the code and save it.
+
+```json
+...
+  "scripts": {
+    "build": "rollup -c ./rollup.config.js",
+    "watch": "rollup -w -c ./rollup.config.js"
+  },
+...
+```
