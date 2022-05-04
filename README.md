@@ -142,3 +142,24 @@ input.addEventListener("change",
 > ```
 > ifcLoader.ifcManager.setWasmPath("static/wasm/");
 > ```
+
+
+![Web-IFC-Viewer startup view](ReadMe_Images/web-ifc-viewer_load_uploaded_model.jpg)
+
+If you have done everything correctly, you should be able to see something similar to [this](https://ifcjs.github.io/web-ifc-viewer/example/index) in your local server. From here, the possibilities are endless.
+
+### Manual Bundling
+
+> Note: At this point, we need to manually bundle this js file using any bundler.
+
+You can bundle this file using any bundler. We are going to use [rollup](https://rollupjs.org/guide/en/#quick-start) to bundle this by using the following command:
+
+```
+npx rollup index.js -o bundle.js -f es -p @rollup/plugin-node-resolve
+```
+
+which is short for:
+
+```
+npx rollup index.js --file bundle.js --format es --plugin @rollup/plugin-node-resolve
+```
