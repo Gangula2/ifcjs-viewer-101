@@ -20,4 +20,61 @@ npm i web-ifc-viewer
 
 npm i rollup --save-dev
 npm i @rollup/plugin-node-resolve --save-dev
-``
+```
+
+### Index.html
+
+The next step is to create an HTML file named index.html as the main document of the application. The HTML will have:
+
+- A div element, used to render the web-ifc-viewer.
+- An input element, which will open IFC files from our computer to the application.
+- A script referencing a file called bundle.js, which is the bundle of the app that we will produce with rollup.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="./favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IFC.js</title>
+</head>
+
+<body>
+    <input type="file" id="file-input">
+    <div id="viewer-container"></div>
+    <script src="./bundle.js"></script>
+</body>
+
+</html>
+```
+
+### Adding style
+
+The following CSS file will make the canvas full screen:
+
+```css
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#viewer-container {
+    position: fixed;
+    /* top: 0; */
+    left: 0;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+```
