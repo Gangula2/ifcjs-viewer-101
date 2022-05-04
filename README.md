@@ -199,3 +199,10 @@ Also, the `package.json` file needs to be modified to contain the scripts to con
   },
 ...
 ```
+
+### Running the app
+
+You'll be able to see the application as expected once your have bundled the index.js file to bundle.js using roll-up. 
+
+To run the application locally after bundling the file, we will need a local server. If you are using VS Code as IDE, one option is to install the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), which allows us to open an instance of Google Chrome, run our web application and see the changes we make to the code in real-time.
+
