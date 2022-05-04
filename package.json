@@ -1,0 +1,27 @@
+{
+  "name": "ifcjs-viewer-101",
+  "version": "1.0.0",
+  "description": "Basic source code for Web-IFC-Viewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnweshGangula/ifcjs-viewer-101.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnweshGangula/ifcjs-viewer-101/issues"
+  },
+  "homepage": "https://github.com/AnweshGangula/ifcjs-viewer-101#readme",
+  "dependencies": {
+    "web-ifc-viewer": "^1.0.177"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "rollup": "^2.71.1"
+  }
+}
