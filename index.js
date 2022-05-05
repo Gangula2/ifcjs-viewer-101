@@ -8,8 +8,13 @@ viewer.grid.setGrid();
 
 const input = document.getElementById("file-input");
 
-window.ondblclick = () => viewer.IFC.selector.pickIfcItem(true);
 window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
+// Select items and log properties
+window.ondblclick = async () => {
+    const item = await viewer.IFC.selector.pickIfcItem(true);
+    if (item.modelID === undefined || item.id === undefined) return;
+    console.log(await viewer.IFC.getProperties(item.modelID, item.id, true));
+}
 viewer.clipper.active = true;
 
 input.addEventListener("change",
@@ -38,5 +43,8 @@ window.onkeydown = (event) => {
     }
     else if (event.code === 'KeyO') {
         viewer.clipper.deletePlane();
+    }
+    else if (event.code === 'Escape') {
+        viewer.IFC.selector.unpickIfcItems();
     }
 }
