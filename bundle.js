@@ -115885,11 +115885,16 @@ class IfcViewerAPI {
     }
 }
 
-const container = document.getElementById('viewer-container');
-const viewer = new IfcViewerAPI({ container, backgroundColor: new Color(0xffffff) });
-viewer.axes.setAxes();
-viewer.grid.setGrid();
+function CreateViewer(container) {
+    let viewer = new IfcViewerAPI({ container, backgroundColor: new Color(0xffffff) });
+    viewer.axes.setAxes();
+    viewer.grid.setGrid();
 
+    return viewer;
+}
+
+const container = document.getElementById('viewer-container');
+let viewer = CreateViewer(container);
 const input = document.getElementById("file-input");
 
 window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
@@ -115914,6 +115919,8 @@ input.addEventListener("change",
 );
 
 async function loadIfc(url) {
+    await viewer.dispose();
+    viewer = CreateViewer(container);
     // await viewer.IFC.setWasmPath("static/wasm/");
     const model = await viewer.IFC.loadIfcUrl(url);
     viewer.shadowDropper.renderShadow(model.modelID);
